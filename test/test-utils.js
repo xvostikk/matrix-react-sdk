@@ -92,6 +92,52 @@ export function createTestClient() {
                 content: {},
             });
         },
+        getGroup: (groupId) => {
+            return {
+                myMembership: 'join',
+            };
+        },
+        getGroupSummary: (groupId) => {
+            return Promise.resolve({
+                profile: {
+                    avatar_url: "mxc://someavatarurl",
+                    is_openly_joinable: true,
+                    is_public: true,
+                    long_description: "This is a <b>LONG</b> description.",
+                    name: "The name of a community",
+                    short_description: "This is a community",
+                },
+                user: {
+                    is_privileged: true, // can edit the group
+                    is_public: true, // appear as a member to non-members
+                    is_publicised: true, // display flair
+                },
+                users_section: {
+                    roles: {},
+                    total_user_count_estimate: 0,
+                    users: [],
+                },
+                rooms_section: {
+                    categories: {},
+                    rooms: [],
+                    total_room_count_estimate: 0,
+                }
+                ,
+            });
+        },
+        getGroupRooms: () => {
+            return Promise.resolve({
+                chunk: [],
+                total_room_count_estimate: 3,
+            });
+        },
+        getGroupUsers: () => {
+            return Promise.resolve({
+                chunk: [],
+                total_user_count_estimate: 3,
+            });
+        },
+        mxcUrlToHttp: (mxc) => mxc,
         setAccountData: sinon.stub(),
         sendTyping: sinon.stub().returns(Promise.resolve({})),
         sendTextMessage: () => Promise.resolve({}),
